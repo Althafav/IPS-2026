@@ -1,0 +1,44 @@
+@import "_partials/_variables";
+@import "_partials/animations";
+
+
+body {
+  background: white;
+
+}
+
+.about-page-wrapper {
+  .feature-section-wrap {
+    background-blend-mode: overlay;
+
+    background: linear-gradient(37deg, #0000007b 69%, #d09350 106.8%);
+  }
+}
+
+.text-gradient-1 {
+  background: linear-gradient(90deg, #000 0%, #db8e4d 76.83%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-1 {
+  background: linear-gradient(180deg, #0291b3 13.99%, #02576b 84.34%);
+}
+
+.gradient-2 {
+  background: linear-gradient(113deg, #917021 1.4%, #5e3d20 88.57%);
+}
+
+.swiper {
+  padding: 20px 0 !important;
+}
+
+.shadow {
+  filter: drop-shadow(0px 20px 44px rgba(0, 0, 0, 0.25));
+}
+
+@import "./locals/home.scss";
+@import "./locals/menu-component.scss";
+@import "./locals/form.scss";
+@import "./locals/footer.scss"
