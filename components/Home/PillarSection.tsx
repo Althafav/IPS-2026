@@ -7,9 +7,9 @@ import SlantedSection from "../UI/SlantedSection/SlantedSection";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
-import 'swiper/css/bundle';
-import 'swiper/css/autoplay';
-import 'swiper/css/free-mode';
+import "swiper/css/bundle";
+import "swiper/css/autoplay";
+import "swiper/css/free-mode";
 
 import Image from "next/image";
 import SectionHeading from "../common/SectionHeading";
@@ -47,7 +47,7 @@ const PillarSection: React.FC<PageDataProps> = ({ pageData }) => {
                 return (
                   <SwiperSlide>
                     <div
-                      className="pillar-card relative rounded-2xl overflow-hidden h-[350px] p-5 flex flex-col justify-end gap-5"
+                      className="pillar-card hover-shadow relative rounded-2xl overflow-hidden h-[350px] p-5 flex flex-col justify-end gap-5"
                       key={index}
                     >
                       <div className="absolute inset-0">
@@ -63,12 +63,7 @@ const PillarSection: React.FC<PageDataProps> = ({ pageData }) => {
                         <h4 className=" text-white text-md font-bold uppercase leading-tight max-w-[200px]">
                           {item.name.value}
                         </h4>
-                        {/* <div
-                        className="prose prose-invert leading-5"
-                          dangerouslySetInnerHTML={{
-                            __html: item.content.value,
-                          }}
-                        /> */}
+                    
                       </div>
                     </div>
                   </SwiperSlide>
