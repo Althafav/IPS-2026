@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { Homepage2026 } from "@/models/homepage2026";
 import HeroSection from "@/components/Home/HeroSection";
 import StatsSection from "@/components/Home/StatsSection";
+import SideAcitivitySection2 from "@/components/Home/SideAcitivitySection2";
 const PillarSection = dynamic(() => import("@/components/Home/PillarSection"), {
   ssr: false,
 });
@@ -34,7 +35,7 @@ export default function Page({ pageData }: PageProps) {
 
   return (
     <div>
-      <div className="homepage overflow-x-hidden">
+      <div className="homepage ">
         <HeroSection pageData={pageData} />
         <StatsSection pageData={pageData} />
         <div className="about-section-wrapper  relative min-h-[600px]">
@@ -63,7 +64,9 @@ export default function Page({ pageData }: PageProps) {
 
         <PillarSection pageData={pageData} />
         <FeaturesSection pageData={pageData} />
-        <SideActivitySection pageData={pageData} />
+
+        {/* <SideActivitySection pageData={pageData} /> */}
+        <SideAcitivitySection2 items={pageData.sideactivitiesitems.value} />
         <PartnersComponent />
       </div>
     </div>
