@@ -33,7 +33,7 @@ export default function RegisterPage({
   pageData,
 }: Props) {
   useEffect(() => {
-    JsLoader.loadFile(`${Globals.BASE_URL}assets/js/registerInterest.js`);
+    JsLoader.loadFile(`/assets/js/registerInterest.js`);
   }, []);
 
   const nationalityRef = useRef<HTMLInputElement>(null);
