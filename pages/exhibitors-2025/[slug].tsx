@@ -58,24 +58,15 @@ export default function ExhibitorDetail({ exhibitor }: Props) {
               )}
 
               {exhibitor.linkedin && (
-                <a
+                <Link
                   href={exhibitor.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-medium px-4 py-2 rounded transition"
                 >
                   <FaLinkedin /> LinkedIn
-                </a>
+                </Link>
               )}
-
-              <Link
-                href={exhibitor.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-medium px-4 py-2 rounded transition"
-              >
-                <FaLinkedin /> LinkedIn
-              </Link>
             </div>
           </div>
 

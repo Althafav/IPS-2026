@@ -8,6 +8,7 @@ import Image from "next/image";
 import SectionHeading from "@/components/common/SectionHeading";
 import { Exhibitionpage2026 } from "@/models/exhibitionpage2026";
 import SlantedSection from "@/components/UI/SlantedSection/SlantedSection";
+import ExhibitorCarousel from "@/components/Exhibition/ExhibitorCarousel";
 
 type PageProps = {
   pageData: Exhibitionpage2026 | null;
@@ -134,10 +135,13 @@ export default function Page({ pageData }: PageProps) {
               className="text-black"
             />
 
-            <div className="grid grid-cols-4 justify-center gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center gap-5">
               {pageData.benefititems.value.map((item: any, index: number) => {
                 return (
-                  <div className="benefit-card p-2   border rounded-2xl">
+                  <div
+                    className="benefit-card p-2   border rounded-2xl"
+                    key={index}
+                  >
                     <div className="image-wrapper bg-[#DEDEDE] p-5 flex justify-center h-[200px] rounded-lg">
                       <img
                         className="w-16 object-contain"
@@ -153,6 +157,10 @@ export default function Page({ pageData }: PageProps) {
               })}
             </div>
           </div>
+        </div>
+
+        <div className="exhibitor-section py-10">
+          <ExhibitorCarousel />
         </div>
       </div>
     </div>

@@ -97,6 +97,7 @@ export default function Page({ pageData }: PageProps) {
         </div>
 
         <div className="pillar-section-wrapper pb-10">
+          
           <PillarSectionSticky items={pageData.pillaritems.value} />
         </div>
 

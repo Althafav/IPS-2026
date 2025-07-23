@@ -28,7 +28,8 @@ export default function PillarSectionSticky({ items }: any) {
             className="absolute inset-0 h-full"
             style={{ background: item.colorcode.value }}
           />
-          <div className="max-w-4xl   mx-auto">
+          
+          <div className="max-w-4xl   mx-auto px-4">
             <div className=" relative rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="w-full  h-full  rounded-2xl overflow-hidden">
                 <Image
