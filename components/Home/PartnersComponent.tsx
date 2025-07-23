@@ -36,8 +36,8 @@ export default function SupportingPartnerComponent() {
         <div className="">
           <Swiper
             modules={[Autoplay]}
-            spaceBetween={24}
-            slidesPerView={4}
+            spaceBetween={30}
+            slidesPerView={2}
             loop
             autoplay={{ delay: 2500, disableOnInteraction: false }}
             breakpoints={{

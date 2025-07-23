@@ -10,6 +10,7 @@ import StickyOverlapSections from "@/components/common/StickyOverlapSections";
 import PillarSectionSticky from "@/components/About/PillarSectionSticky";
 import SectionHeading from "@/components/common/SectionHeading";
 import Image from "next/image";
+import TestimonialSection from "@/components/About/TestimonialSection";
 
 type PageProps = {
   pageData: Aboutpage2026 | null;
@@ -91,7 +92,11 @@ export default function Page({ pageData }: PageProps) {
           </div>
         </div>
 
-        <div className="pillar-section-wrapper py-10">
+        <div className="testimonial-section pt-10">
+          <TestimonialSection pageData={pageData} />
+        </div>
+
+        <div className="pillar-section-wrapper pb-10">
           <PillarSectionSticky items={pageData.pillaritems.value} />
         </div>
 

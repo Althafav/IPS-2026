@@ -35,7 +35,6 @@ export default function FooterComponent() {
   if (!pageData) {
     return null;
   }
-  
 
   const menuItems = pageData.menuitems.value as unknown as Menuitem[];
   return (
@@ -61,28 +60,28 @@ export default function FooterComponent() {
 
               <div className="flex gap-3 mt-10">
                 <Link href={pageData.linkedinlink.value} target="_blank">
-                  <FaLinkedinIn className="text-primary-orange" size={28} />
+                  <FaLinkedinIn className="text-primary-orange" size={32} />
                 </Link>
 
                 <Link href={pageData.facebooklink.value}>
-                  <FaFacebookF className="text-primary-orange" size={28} />
+                  <FaFacebookF className="text-primary-orange" size={32} />
                 </Link>
 
                 <Link href={pageData.xtwiterlink.value}>
-                  <FaXTwitter className="text-primary-orange" size={28} />
+                  <FaXTwitter className="text-primary-orange" size={32} />
                 </Link>
 
                 <Link href={pageData.youtubelink.value}>
-                  <FaYoutube className="text-primary-orange" size={28} />
+                  <FaYoutube className="text-primary-orange" size={32} />
                 </Link>
 
                 <Link href={pageData.instagramlink.value}>
-                  <FaInstagram className="text-primary-orange" size={28} />
+                  <FaInstagram className="text-primary-orange" size={32} />
                 </Link>
               </div>
             </div>
 
-            <nav className="flex flex-col gap-2 ">
+            <nav className="flex flex-col gap-5 ">
               {menuItems.map((item) => {
                 const name = item.name.value;
                 const link = item.link.value;
@@ -109,24 +108,28 @@ export default function FooterComponent() {
               })}
             </nav>
 
-            <div className="text-white">
-              <p className="mb-3 font-bold">Contact Us</p>
-              <div className="flex flex-col gap-4">
-                <div className="flex gap-2">
-                  <FaPhoneAlt className="text-primary-orange" size={24} />
-                  <p>{pageData.mobile.value}</p>
-                </div>
+            <div className="text-white flex flex-col gap-5">
+              <div>
+                <p className="mb-3 font-bold">Contact Us</p>
+                <div className="flex flex-col gap-4">
+                  <div className="flex gap-2">
+                    <FaPhoneAlt className="text-primary-orange" size={24} />
+                    <p>{pageData.mobile.value}</p>
+                  </div>
 
-                <div className="flex gap-2">
-                  <IoMail className="text-primary-orange" size={24} />
-                  <p>{pageData.email.value}</p>
+                  <div className="flex gap-2">
+                    <IoMail className="text-primary-orange" size={24} />
+                    <p>{pageData.email.value}</p>
+                  </div>
                 </div>
               </div>
 
-              <p className="my-3 font-bold">Address</p>
-              <div className="flex gap-2">
-                <IoMdPin className="text-primary-orange" size={24} />
-                <p className="max-w-[200px]">{pageData.address.value}</p>
+              <div>
+                <p className="my-3 font-bold">Address</p>
+                <div className="flex gap-2">
+                  <IoMdPin className="text-primary-orange" size={24} />
+                  <p className="max-w-[200px]">{pageData.address.value}</p>
+                </div>
               </div>
             </div>
           </div>

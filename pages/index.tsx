@@ -41,10 +41,10 @@ export default function Page({ pageData }: PageProps) {
         <StatsSection pageData={pageData} />
         <div className="about-section-wrapper  relative min-h-[600px]">
           <div className="container mx-auto absolute -bottom-48 left-1/2 transform -translate-x-1/2 z-10 ">
-            <h2 className="text-primary-blue text-center lg:text-3xl mb-3">
+            <h2 className="text-primary-blue text-center lg:text-2xl mb-3">
               {pageData.videoheading.value}
             </h2>
-            <p className="text-center max-w-md mx-auto">
+            <p className="text-center max-w-2xl mx-auto text-lg">
               {pageData.videodescription.value}
             </p>
 
@@ -66,7 +66,6 @@ export default function Page({ pageData }: PageProps) {
         <PillarSection pageData={pageData} />
         <FeaturesSection pageData={pageData} />
 
-        {/* <SideActivitySection pageData={pageData} /> */}
         <div className="container mx-auto pt-10">
           <SectionHeading heading={pageData.sideactivitesheading.value} />
         </div>
