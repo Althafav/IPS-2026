@@ -1,9 +1,19 @@
-window.cfields = { "23": "job_title", "12": "mobile_phone", "3": "country", "159": "dws_interests", "278": "dws_book_your_stand", "160": "dws_download_brochure", "161": "dws_download_sponsorship_packages", "162": "dws_subscribe_to_newsletter", "6": "message", "38": "forms_submitted" };
+window.cfields = [];
 window._show_thank_you = function (id, message, trackcmp_url, email) {
-    var form = document.getElementById('_form_' + id + '_'), thank_you = form.querySelector('._form-thank-you');
+    var form = document.getElementById('_form_' + id + '_'), thank_you = form.querySelector(id == "235" ? "._form-newsletter-thank-you" : "._form-thank-you");
     form.querySelector('._form-content').style.display = 'none';
-    thank_you.innerHTML = message;
+    if (message) {
+        thank_you.innerHTML = message;
+    }
+     var thankyouParameter = window.location.pathname;
+    while (thankyouParameter.charAt(0) === '/') {
+        thankyouParameter = thankyouParameter.substring(1);
+    }
+    if (thankyouParameter.includes("/")) {
+        thankyouParameter = thankyouParameter.replace("/", "&");
+    }
     thank_you.style.display = 'block';
+    window.location.href = "/thank-you/" + thankyouParameter;
     const vgoAlias = typeof visitorGlobalObjectAlias === 'undefined' ? 'vgo' : visitorGlobalObjectAlias;
     var visitorObject = window[vgoAlias];
     if (email && typeof visitorObject !== 'undefined') {
@@ -16,7 +26,10 @@ window._show_thank_you = function (id, message, trackcmp_url, email) {
     if (typeof window._form_callback !== 'undefined') window._form_callback(id);
 };
 window._show_error = function (id, message, html) {
-    var form = document.getElementById('_form_' + id + '_'), err = document.createElement('div'), button = form.querySelector('button'), old_error = form.querySelector('._form_error');
+    var form = document.getElementById('_form_' + id + '_'),
+        err = document.createElement('div'),
+        button = form.querySelector('button'),
+        old_error = form.querySelector('._form_error');
     if (old_error) old_error.parentNode.removeChild(old_error);
     err.innerHTML = message;
     err.className = '_error-inner _form_error _no_arrow';
@@ -24,7 +37,9 @@ window._show_error = function (id, message, html) {
     wrapper.className = '_form-inner';
     wrapper.appendChild(err);
     button.parentNode.insertBefore(wrapper, button);
-    document.querySelector('[id^="_form"][id$="_submit"]').disabled = false;
+    var submitButton = form.querySelector('[id^="_form"][id$="_submit"]');
+    submitButton.disabled = false;
+    submitButton.classList.remove('processing');
     if (html) {
         var div = document.createElement('div');
         div.className = '_error-html';
@@ -32,11 +47,13 @@ window._show_error = function (id, message, html) {
         err.appendChild(div);
     }
 };
-window._load_script = function (url, callback) {
+window._load_script = function (url, callback, isSubmit) {
     var head = document.querySelector('head'), script = document.createElement('script'), r = false;
+    var submitButton = document.querySelector('#_form_235_submit');
     script.type = 'text/javascript';
     script.charset = 'utf-8';
     script.src = url;
+    script.async = true;
     if (callback) {
         script.onload = script.onreadystatechange = function () {
             if (!r && (!this.readyState || this.readyState == 'complete')) {
@@ -45,6 +62,18 @@ window._load_script = function (url, callback) {
             }
         };
     }
+    script.onerror = function () {
+        if (isSubmit) {
+            if (script.src.length > 10000) {
+                _show_error("235", "Sorry, your submission failed. Please shorten your responses and try again.");
+            } else {
+                _show_error("235", "Sorry, your submission failed. Please try again.");
+            }
+            submitButton.disabled = false;
+            submitButton.classList.remove('processing');
+        }
+    }
+
     head.appendChild(script);
 };
 (function () {
@@ -58,7 +87,7 @@ window._load_script = function (url, callback) {
         var time = now.getTime();
         var expireTime = time + 1000 * 60 * 60 * 24 * 365;
         now.setTime(expireTime);
-        document.cookie = name + '=' + value + '; expires=' + now + ';path=/; Secure; SameSite=Lax;';// cannot be HttpOnly
+        document.cookie = name + '=' + value + '; expires=' + now + ';path=/; Secure; SameSite=Lax;';
     }
     var addEvent = function (element, event, func) {
         if (element.addEventListener) {
@@ -72,7 +101,7 @@ window._load_script = function (url, callback) {
         }
     }
     var _removed = false;
-    var form_to_submit = document.getElementById('_form_305_');
+    var form_to_submit = document.getElementById('_form_235_');
     var allInputs = form_to_submit.querySelectorAll('input, select, textarea'), tooltips = [], submitted = false;
 
     var getUrlParam = function (name) {
@@ -80,11 +109,47 @@ window._load_script = function (url, callback) {
         return params.get(name) || false;
     };
 
+    var acctDateFormat = "%d/%B/%Y";
+    var getNormalizedDate = function (date, acctFormat) {
+        var decodedDate = decodeURIComponent(date);
+        if (Date.parse(decodedDate)) {
+            var dateObj = new Date(decodedDate);
+            var year = dateObj.getFullYear();
+            var month = dateObj.getMonth() + 1;
+            var day = dateObj.getDate();
+            return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
+        } else if (acctFormat.match(/(%d|%e).*%m/gm) !== null) {
+            return decodedDate.replace(/(\d{1,2}).*(\d{1,2}).*(\d{4})/gm, '$3-$1-$2');
+        }
+        return false;
+    };
+
+    var getNormalizedTime = function (time) {
+        var hour, minutes;
+        var decodedTime = decodeURIComponent(time);
+        var timeParts = Array.from(decodedTime.matchAll(/(\d{1,2}):(\d{1,2})\W*([AaPp][Mm])?/gm))[0];
+        if (timeParts[3]) { // 12 hour format
+            var isPM = timeParts[3].toLowerCase() === 'pm';
+            if (isPM) {
+                hour = parseInt(timeParts[1]) === 12 ? '12' : `${parseInt(timeParts[1]) + 12}`;
+            } else {
+                hour = parseInt(timeParts[1]) === 12 ? '0' : timeParts[1];
+            }
+        } else { // 24 hour format
+            hour = timeParts[1];
+        }
+        var normalizedHour = parseInt(hour) < 10 ? `0${hour}` : hour;
+        var minutes = timeParts[2];
+        return `${normalizedHour}:${minutes}`;
+    };
+
     for (var i = 0; i < allInputs.length; i++) {
         var regexStr = "field\\[(\\d+)\\]";
         var results = new RegExp(regexStr).exec(allInputs[i].name);
         if (results != undefined) {
-            allInputs[i].dataset.name = window.cfields[results[1]];
+            allInputs[i].dataset.name = allInputs[i].name.match(/\[time\]$/)
+                ? `${window.cfields[results[1]]}_time`
+                : window.cfields[results[1]];
         } else {
             allInputs[i].dataset.name = allInputs[i].name;
         }
@@ -98,6 +163,10 @@ window._load_script = function (url, callback) {
                 if (allInputs[i].value == fieldVal) {
                     allInputs[i].checked = true;
                 }
+            } else if (allInputs[i].type == "date") {
+                allInputs[i].value = getNormalizedDate(fieldVal, acctDateFormat);
+            } else if (allInputs[i].type == "time") {
+                allInputs[i].value = getNormalizedTime(fieldVal);
             } else {
                 allInputs[i].value = fieldVal;
             }
@@ -120,7 +189,9 @@ window._load_script = function (url, callback) {
         }
     };
     var create_tooltip = function (elem, text) {
-        var tooltip = document.createElement('div'), arrow = document.createElement('div'), inner = document.createElement('div'), new_tooltip = {};
+        var tooltip = document.createElement('div'),
+            arrow = document.createElement('div'),
+            inner = document.createElement('div'), new_tooltip = {};
         if (elem.type != 'radio' && elem.type != 'checkbox') {
             tooltip.className = '_error';
             arrow.className = '_error-arrow';
@@ -142,7 +213,8 @@ window._load_script = function (url, callback) {
     };
     var resize_tooltip = function (tooltip) {
         var rect = tooltip.elem.getBoundingClientRect();
-        var doc = document.documentElement, scrollPosition = rect.top - ((window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0));
+        var doc = document.documentElement,
+            scrollPosition = rect.top - ((window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0));
         if (scrollPosition < 40) {
             tooltip.tip.className = tooltip.tip.className.replace(/ ?(_above|_below) ?/g, '') + ' _below';
         } else {
@@ -203,7 +275,10 @@ window._load_script = function (url, callback) {
                     }
                 } else {
                     for (var i = 0; i < elem.options.length; i++) {
-                        if (elem.options[i].selected && (!elem.options[i].value || (elem.options[i].value.match(/\n/g)))) {
+                        if (elem.options[i].selected
+                            && (!elem.options[i].value
+                                || (elem.options[i].value.match(/\n/g)))
+                        ) {
                             selected = false;
                         }
                     }
@@ -386,109 +461,31 @@ window._load_script = function (url, callback) {
             if (el != null) {
                 var sitekey = el.getAttribute("data-sitekey");
                 var stoken = el.getAttribute("data-stoken");
-                try{
+                try {
                     grecaptcha.render(recaptcha_id, { "sitekey": sitekey, "stoken": stoken });
                 }
-                catch(e){
+                catch (e) {
 
                 }
             }
         }
-    }; _load_script("https://www.google.com/recaptcha/api.js?onload=recaptcha_callback&render=explicit");
+    }; _load_script(
+        "https://www.google.com/recaptcha/api.js?onload=recaptcha_callback&render=explicit"
+    );
     var _form_serialize = function (form) { if (!form || form.nodeName !== "FORM") { return } var i, j, q = []; for (i = 0; i < form.elements.length; i++) { if (form.elements[i].name === "") { continue } switch (form.elements[i].nodeName) { case "INPUT": switch (form.elements[i].type) { case "tel": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].previousSibling.querySelector('div.iti__selected-dial-code').innerText) + encodeURIComponent(" ") + encodeURIComponent(form.elements[i].value)); break; case "text": case "number": case "date": case "time": case "hidden": case "password": case "button": case "reset": case "submit": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "checkbox": case "radio": if (form.elements[i].checked) { q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)) } break; case "file": break }break; case "TEXTAREA": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "SELECT": switch (form.elements[i].type) { case "select-one": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break; case "select-multiple": for (j = 0; j < form.elements[i].options.length; j++) { if (form.elements[i].options[j].selected) { q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].options[j].value)) } } break }break; case "BUTTON": switch (form.elements[i].type) { case "reset": case "submit": case "button": q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value)); break }break } } return q.join("&") };
     var form_submit = function (e) {
         e.preventDefault();
         if (validate_form()) {
-            if ($("#emailValidate").prop("checked") == true) {
-
-                // use this trick to get the submit button & disable it using plain javascript
-                document.querySelector('#_form_305_submit').disabled = true;
-                var serialized = _form_serialize(document.getElementById('_form_305_')).replace(/%0A/g, '\\n');
-                var err = form_to_submit.querySelector('._form_error');
-                err ? err.parentNode.removeChild(err) : false;
-                _load_script('//ac.strategic.ae/proc.php?' + serialized + '&jsonp=true');
-
-                if ($("#brochure").prop("checked") == true) {
-                    downloadDocument("Dubai WoodShow 2025 - Brochure.pdf", "/dubai/documents/DWS 2025 - Brochure.pdf");
-                }
-                if ($("#Sponsorship").prop("checked") == true) {
-                    downloadDocument("Sponsorship packages.pdf", "/dubai/documents/DWS 2023 - Sponsorship package.pdf");
-                }
-
-                 /////Monday PUSH API Starts/////
-                 var interest = $('input[name="field[159][]"]:checked')
-                 .map(function () {
-                     return $(this).val();
-                 })
-                 .get()
-                 .join('\\\",\\\"');
-
-                 interest = `\\\"${interest}\\\"`;
-
-             var firstname = $('input[name="firstname"]').val();
-             var lastname = $('input[name="lastname"]').val();
-             var name = `${firstname} ${lastname}`
-             var organization = $('input[name="customer_account"]').val();
-             var email = $('input[name="email"]').val();
-             var jobTitle = $('input[name="field[23]"]').val();
-             var mobileNumber = Number($('input[name="field[12]"]').val());
-             var phoneCode = $('select[name="phoneCode"]').val();
-             var mobileText = `+${phoneCode} ${mobileNumber}`;
-             var country = $('select[name="field[3]"]').val();
-             var message = $('textarea[name="field[6]"]').val();
-             if (message == undefined || message == "") {
-                 message = "N/A";
-             }
-             if (message) {
-                message = message.replaceAll("/", " ");
-                message = message.replaceAll("\n", " ");
-                message = message.replaceAll("\\", " ");
-            }
-             var formSubmitted = $('input[name="field[38]"]').val();
-             var itemName = name;
-             var leadType = "DWS Lead";
-
-             const mutation = `mutation {
-                 create_item(
-                     board_id: 7268050149, 
-                     group_id: \"new_group63455__1\", 
-                     item_name: \"${itemName}\", 
-                     column_values: \"{
-                         \\\"lead_status\\\":\\\"New Lead\\\",
-                         \\\"name\\\":\\\"${name}\\\",
-                         \\\"status_1__1\\\":\\\"${leadType}\\\",
-                         \\\"country____1\\\":\\\"${country}\\\",
-                         \\\"text2__1\\\":\\\"${jobTitle}\\\",
-                         \\\"lead_email\\\":{\\\"email\\\":\\\"${email}\\\",\\\"text\\\":\\\"${email}\\\"},
-                         \\\"dup__of_mobile8__1\\\":\\\"${mobileText}\\\",
-                         \\\"long_text__1\\\":\\\"${message}\\\",
-                         \\\"lead_company\\\":\\\"${organization}\\\",
-                         \\\"interested_in____1\\\":{\\\"labels\\\":[${interest}]},
-                         \\\"text49__1\\\":\\\"${formSubmitted}\\\"}\") 
-                         {id}}`;
-
-             var settings = {
-                 "url": "https://api.monday.com/v2",
-                 "method": "POST",
-                 "timeout": 0,
-                 "headers": {
-                     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjM4NTQxMTI2OSwiYWFpIjoxMSwidWlkIjo2MzU5NDg5MywiaWFkIjoiMjAyNC0wNy0xN1QwODo1MjoxNS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MjQ0NzAwNjQsInJnbiI6InVzZTEifQ.mFBBbSdTcCTF0iU8hYFDLoLmZQHnLjNoMFk7d6dUYTk",
-                     "Content-Type": "application/json",
-                     "API-version": "2023-10",
-                     "Cookie": "__cf_bm=r0lDqnsvWXGmEVZofHvAkLCnjKGaQHExYQIA3u5ciPM-1724733381-1.0.1.1-bI9CMjAqfTjUdQqfXj.oAiHL_qz4RqFtgO57jrTNDhohtQkE5lrc0yvFTrLgoWpDkaj4JepFQjm7svliN.EIpDHm6yeqLtgFIZXc86Ni1.c"
-                 },
-                 "data": JSON.stringify({
-                     "query": mutation
-                 }),
-             };
-
-             $.ajax(settings).done(function (response) {
-                 console.log(response);
-             });
-
-               /////Monday PUSH API Ends/////
-
-            }
+            // use this trick to get the submit button & disable it using plain javascript
+            var submitButton = e.target.querySelector('#_form_235_submit');
+            submitButton.disabled = true;
+            submitButton.classList.add('processing');
+            var serialized = _form_serialize(
+                document.getElementById('_form_235_')
+            ).replace(/%0A/g, '\\n');
+            var err = form_to_submit.querySelector('._form_error');
+            err ? err.parentNode.removeChild(err) : false;
+            _load_script('//ac.strategic.ae/proc.php?' + serialized + '&jsonp=true', null, true);
         }
         return false;
     };

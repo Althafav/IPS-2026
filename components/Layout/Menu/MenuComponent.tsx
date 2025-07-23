@@ -22,7 +22,7 @@ export default function MenuComponent() {
   if (!pageData) return null;
 
   return (
-    <div className="menu-wrapper shadow bg-white z-50 relative">
+    <div className="menu-wrapper shadow-sm bg-white z-50 relative">
       <div className="container mx-auto">
         <div className="flex py-5 justify-between items-center">
           {/* Left Logo */}

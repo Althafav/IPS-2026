@@ -8,6 +8,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <Script
           src="https://code.jquery.com/jquery-3.6.0.min.js"
           strategy="beforeInteractive"

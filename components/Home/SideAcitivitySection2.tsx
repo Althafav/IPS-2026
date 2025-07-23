@@ -8,13 +8,12 @@ export default function SideAcitivitySection2({ items }: any) {
       {items.map((item: any, idx: number) => (
         <div
           key={idx}
-          className=" sticky-stack-section flex items-center justify-center "
+          className=" sticky-stack-section flex items-center justify-center py-20"
           style={{
             position: "sticky",
             top: 0,
-            height: "100vh",
+
             zIndex: idx + 1,
-            boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
           }}
         >
           <div className="absolute inset-0 z-0">
@@ -27,7 +26,8 @@ export default function SideAcitivitySection2({ items }: any) {
           <div
             className="absolute inset-0 h-full"
             style={{
-              background: "linear-gradient(rgb(143 174 179 / 81%) 0%, rgb(0, 45, 53) 110%)",
+              background:
+                "linear-gradient(rgb(143 174 179 / 81%) 0%, rgb(0, 45, 53) 110%)",
             }}
           />
           <div className="max-w-4xl   mx-auto">

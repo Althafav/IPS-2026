@@ -32,7 +32,7 @@ const PillarSection: React.FC<PageDataProps> = ({ pageData }) => {
             />
             <Swiper
               modules={[Autoplay]}
-              spaceBetween={20}
+              spaceBetween={30}
               slidesPerView={2}
               loop
               autoplay={{ delay: 2500, disableOnInteraction: false }}
@@ -63,7 +63,6 @@ const PillarSection: React.FC<PageDataProps> = ({ pageData }) => {
                         <h4 className=" text-white text-md font-bold uppercase leading-tight max-w-[200px]">
                           {item.name.value}
                         </h4>
-                    
                       </div>
                     </div>
                   </SwiperSlide>

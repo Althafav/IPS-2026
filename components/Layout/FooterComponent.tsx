@@ -18,6 +18,7 @@ import { IoMail } from "react-icons/io5";
 import { IoMdPin } from "react-icons/io";
 import { FaXTwitter } from "react-icons/fa6";
 import SlantedSection from "../UI/SlantedSection/SlantedSection";
+import JsLoader from "@/modules/JsLoader";
 
 export default function FooterComponent() {
   const [pageData, setPageData] = useState<Globalcomponent | null>(null);
@@ -34,6 +35,7 @@ export default function FooterComponent() {
   if (!pageData) {
     return null;
   }
+  
 
   const menuItems = pageData.menuitems.value as unknown as Menuitem[];
   return (

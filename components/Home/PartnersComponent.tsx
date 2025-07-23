@@ -26,7 +26,7 @@ export default function SupportingPartnerComponent() {
   if (!pageData) return null;
 
   return (
-    <section className="supporting-partner-section py-12">
+    <section className="supporting-partner-section py-20">
       <div className="container mx-auto">
         <SectionHeading
           heading="Partners & Sponsors"

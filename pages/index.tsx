@@ -8,6 +8,7 @@ import { Homepage2026 } from "@/models/homepage2026";
 import HeroSection from "@/components/Home/HeroSection";
 import StatsSection from "@/components/Home/StatsSection";
 import SideAcitivitySection2 from "@/components/Home/SideAcitivitySection2";
+import SectionHeading from "@/components/common/SectionHeading";
 const PillarSection = dynamic(() => import("@/components/Home/PillarSection"), {
   ssr: false,
 });
@@ -66,6 +67,9 @@ export default function Page({ pageData }: PageProps) {
         <FeaturesSection pageData={pageData} />
 
         {/* <SideActivitySection pageData={pageData} /> */}
+        <div className="container mx-auto pt-10">
+          <SectionHeading heading={pageData.sideactivitesheading.value} />
+        </div>
         <SideAcitivitySection2 items={pageData.sideactivitiesitems.value} />
         <PartnersComponent />
       </div>
