@@ -70,7 +70,7 @@ export default function Page({ pageData }: Props) {
             >
               <div className="relative w-full h-[200px] mask-card-shape overflow-hidden group">
                 <Image
-                  src={report.image.value[0]?.url || "/placeholder.png"}
+                  src={report.image.value[0]?.url || ""}
                   alt={report.image.value[0]?.name || report.name.value || "Report"}
                   fill
                   className="object-cover"

@@ -8,7 +8,7 @@ export default function SideAcitivitySection2({ items }: any) {
       {items.map((item: any, idx: number) => (
         <div
           key={idx}
-          className=" sticky-stack-section flex items-center justify-center py-20"
+          className=" sticky-stack-section flex items-center justify-center py-40"
           style={{
             position: "sticky",
             top: 0,
@@ -18,18 +18,12 @@ export default function SideAcitivitySection2({ items }: any) {
         >
           <div className="absolute inset-0 z-0">
             <img
-              src={item.image.value[0]?.url}
+              src={item.backgroundimage.value[0]?.url}
               alt=""
-              className="w-full h-full aspect-video object-cover object-top"
+              className="w-full h-full aspect-video object-cover "
             />
           </div>
-          <div
-            className="absolute inset-0 h-full"
-            style={{
-              background:
-                "linear-gradient(rgb(143 174 179 / 81%) 0%, rgb(0, 45, 53) 110%)",
-            }}
-          />
+
           <div className="max-w-4xl   mx-auto">
             <div className=" relative rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="w-full  h-full  rounded-2xl overflow-hidden">

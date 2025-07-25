@@ -142,7 +142,7 @@ export default function Page({ pageData }: PageProps) {
                     className="benefit-card p-2   border rounded-2xl"
                     key={index}
                   >
-                    <div className="image-wrapper bg-[#DEDEDE] p-5 flex justify-center h-[200px] rounded-lg">
+                    <div className="image-wrapper bg-primary-blue p-5 flex justify-center h-[200px] rounded-lg">
                       <img
                         className="w-16 object-contain"
                         src={item.image.value[0]?.url}

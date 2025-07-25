@@ -132,7 +132,7 @@ const TestimonialSection: React.FC<PageDataProps> = ({ pageData }) => {
                               __html: item.content.value,
                             }}
                           />
-                          <div className="bg-white border-[#FF6704] border-4 h-20 w-20 rounded-full p-5 flex justify-center items-center">
+                          <div className="bg-white border-[#FF6704] border-4 h-20 w-20 rounded-full p-2 flex justify-center items-center">
                             <Image
                               width={400}
                               height={500}

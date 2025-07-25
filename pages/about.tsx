@@ -97,7 +97,6 @@ export default function Page({ pageData }: PageProps) {
         </div>
 
         <div className="pillar-section-wrapper pb-10">
-          
           <PillarSectionSticky items={pageData.pillaritems.value} />
         </div>
 
@@ -124,13 +123,15 @@ export default function Page({ pageData }: PageProps) {
                     >
                       <div className="flex-shrink-0 flex flex-col items-center">
                         {item.image.value.length > 0 ? (
-                          <Image
-                            width={300}
-                            height={300}
-                            src={item.image.value[0]?.url}
-                            alt=""
-                            className="w-[300px] aspect-square object-cover  rounded-2xl"
-                          />
+                          <div className="aspect-square">
+                            <Image
+                              width={300}
+                              height={300}
+                              src={item.image.value[0]?.url}
+                              alt=""
+                              className=" aspect-square object-cover  rounded-2xl"
+                            />
+                          </div>
                         ) : (
                           <div className="w-[300px] aspect-square rounded-2xl bg-slate-400"></div>
                         )}
@@ -189,12 +190,15 @@ export default function Page({ pageData }: PageProps) {
                     >
                       <div className="flex-shrink-0 flex flex-col items-center">
                         {item.image.value.length > 0 ? (
-                          <Image
-                            width={300}
-                            src={item.image.value[0]?.url}
-                            alt=""
-                            className="w-[300px] aspect-square object-cover  rounded-2xl"
-                          />
+                          <div className="aspect-square">
+                            <Image
+                              width={300}
+                              height={300}
+                              src={item.image.value[0]?.url}
+                              alt=""
+                              className=" aspect-square object-cover  rounded-2xl"
+                            />
+                          </div>
                         ) : (
                           <div className="w-[300px] aspect-square rounded-2xl bg-slate-400"></div>
                         )}

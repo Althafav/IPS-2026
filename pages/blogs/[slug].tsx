@@ -61,7 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       .toPromise();
 
     const articleItem = response.items[0] || null;
-    console.log(articleItem, "a");
+   
 
     return {
       props: {

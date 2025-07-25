@@ -131,7 +131,7 @@ backdrop-filter: blur(35px);
   mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='364' height='271' viewBox='0 0 364 271' fill='none'><path d='M233.19 258.784L237.15 263.596C240.949 268.213 246.615 270.889 252.594 270.889H343.401C354.447 270.889 363.401 261.934 363.401 250.889V20C363.401 8.95431 354.446 0 343.401 0H20C8.95432 0 0 8.95431 0 20V229.757C0 240.734 8.84787 249.66 19.8248 249.756L217.922 251.492C223.839 251.544 229.43 254.214 233.19 258.784Z' fill='%23EEEEEE'/></svg>");
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
-  background-color: #ddd; /* fallback, can be anything */
+  background-color: var(--color-primary-blue);
 }
 
 .clip-card-shape {
