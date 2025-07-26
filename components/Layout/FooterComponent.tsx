@@ -81,32 +81,34 @@ export default function FooterComponent() {
               </div>
             </div>
 
-            <nav className="flex flex-col gap-5 ">
-              {menuItems.map((item) => {
-                const name = item.name.value;
-                const link = item.link.value;
-                const target =
-                  item.isexternal.value === "Yes" ? "_blank" : "_self";
-                const children = item.items.value as Menuitem[];
+            <div className="flex justify-center">
+              <nav className="flex flex-col gap-5">
+                {menuItems.map((item) => {
+                  const name = item.name.value;
+                  const link = item.link.value;
+                  const target =
+                    item.isexternal.value === "Yes" ? "_blank" : "_self";
+                  const children = item.items.value as Menuitem[];
 
-                return (
-                  <div key={item.system.id} className="relative group ">
-                    <Link
-                      href={link}
-                      target={target}
-                      className="px-3 py-2 
+                  return (
+                    <div key={item.system.id} className="relative group ">
+                      <Link
+                        href={link}
+                        target={target}
+                        className="px-3 py-2 
                     
                    text-white
                    text-md
                      hover:text-primary-orange
                     transition-colors duration-200"
-                    >
-                      <span className="text-sm"> {name}</span>
-                    </Link>
-                  </div>
-                );
-              })}
-            </nav>
+                      >
+                        <span className="text-sm"> {name}</span>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </nav>
+            </div>
 
             <div className="text-white flex flex-col gap-5">
               <div>

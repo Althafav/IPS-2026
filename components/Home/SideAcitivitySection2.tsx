@@ -24,7 +24,7 @@ export default function SideAcitivitySection2({ items }: any) {
             />
           </div>
 
-          <div className="max-w-4xl   mx-auto">
+          <div className="container   mx-auto">
             <div className=" relative rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="w-full  h-full  rounded-2xl overflow-hidden">
                 <Image

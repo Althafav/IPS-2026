@@ -38,7 +38,7 @@ export default function Page({ pageData }: Props) {
   }, [selectedYear, allReports]);
 
   return (
-    <>
+    <div className="">
       <Head>
         <title>Post Show Reports</title>
       </Head>
@@ -104,7 +104,7 @@ export default function Page({ pageData }: Props) {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
