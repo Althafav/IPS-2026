@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://https://ifacglobal.com/",
+  siteUrl: "https://www.ipscongress.com/",
   generateRobotsTxt: true,
   sitemapSize: 100000,
   generateIndexSitemap: false,

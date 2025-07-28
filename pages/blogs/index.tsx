@@ -5,6 +5,7 @@ import Image from "next/image";
 import Globals from "@/modules/Globals";
 import { Blogspage2026 } from "@/models/blogspage2026";
 import { slugify } from "@/lib/slugify";
+import InnerBanner from "@/components/common/InnerBanner";
 
 interface Props {
   pageData: any;
@@ -26,10 +27,7 @@ export default function BlogsPage({ pageData }: Props) {
           property="og:description"
           content={pageData.metadataMetadescription.value}
         />
-        <meta
-          property="og:url"
-          content="https://www.ipscongress.com/blogs"
-        />
+        <meta property="og:url" content="https://www.ipscongress.com/blogs" />
         <meta property="og:site_name" content={Globals.SITE_NAME} />
         <meta
           property="og:image"
@@ -50,12 +48,14 @@ export default function BlogsPage({ pageData }: Props) {
           content="https://www.ipscongress.com/assets/logos/ips-logo-thumbnail.jpg"
         />
 
-        <link
-          rel="canonical"
-          href="https://www.ipscongress.com/blogs"
-        />
+        <link rel="canonical" href="https://www.ipscongress.com/blogs" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+
+      <InnerBanner
+        bannerImage={pageData.bannerimage.value[0]?.url}
+        bannerHeading={pageData.bannerheading.value}
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -76,7 +76,7 @@ export default function BlogsPage({ pageData }: Props) {
                 <h2 className="text-md font-semibold mb-2">
                   {blog.heading.value}
                 </h2>
-                <p className="text-muted small">
+                {/* <p className="text-muted small">
                   {blog.system.lastModified
                     ? new Date(blog.system.lastModified).toLocaleDateString(
                         "en-GB",
@@ -87,7 +87,7 @@ export default function BlogsPage({ pageData }: Props) {
                         }
                       )
                     : ""}
-                </p>
+                </p> */}
               </div>
             </Link>
           ))}

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://https://ifacglobal.com/
+Host: https://www.ipscongress.com/
 
 # Sitemaps
-Sitemap: https://https://ifacglobal.com/sitemap.xml
+Sitemap: https://www.ipscongress.com/sitemap.xml

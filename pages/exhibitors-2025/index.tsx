@@ -14,13 +14,11 @@ interface Props {
 export default function ExhibitorsPage({ exhibitors }: Props) {
   const [selectedCountry, setSelectedCountry] = useState("All");
 
-  // 🔹 Get unique countries
   const countries = useMemo(() => {
     const unique = new Set(exhibitors.map((e) => e.country).filter(Boolean));
     return ["All", ...Array.from(unique)];
   }, [exhibitors]);
 
-  // 🔹 Filter by country
   const filteredExhibitors = useMemo(() => {
     return selectedCountry === "All"
       ? exhibitors

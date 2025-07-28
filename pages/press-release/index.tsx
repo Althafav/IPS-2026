@@ -5,6 +5,7 @@ import Image from "next/image";
 import Globals from "@/modules/Globals";
 import { Blogspage2026 } from "@/models/blogspage2026";
 import { slugify } from "@/lib/slugify";
+import InnerBanner from "@/components/common/InnerBanner";
 
 interface Props {
   pageData: any;
@@ -16,6 +17,10 @@ export default function BlogsPage({ pageData }: Props) {
       <Head>
         <title>Blogs</title>
       </Head>
+      <InnerBanner
+        bannerImage={pageData.bannerimage.value[0]?.url}
+        bannerHeading={pageData.bannerheading.value}
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
