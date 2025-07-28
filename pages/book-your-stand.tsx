@@ -131,6 +131,11 @@ export default function RegisterPage({
       </Head>
       <div className="container">
         <div className="register-interest-form-wrapper-2026 py-10 bg-white relative">
+          <img
+            src={pageData.bannerimage.value[0]?.url}
+            alt=""
+            className="form-banner-img mb-5 aspect-auto object-cover h-auto"
+          />
           <div className="">
             <div className="col-12">
               <div className="row">
@@ -163,10 +168,7 @@ export default function RegisterPage({
                     <input type="hidden" name="field[329]" value={subsource} />
 
                     <div className="_form-content form-grid">
-                      <h1 className="text-primary-blue text-2xl mb-5">
-                        {pageData.bannerheading.value}
-                      </h1>
-                      <div className="grid grid-cols-2 gap-5">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="">
                           <input
                             type="text"
@@ -307,10 +309,6 @@ export default function RegisterPage({
 
                         <div className="">
                           <div className="_form_element _x73880331 _full_width form-group">
-                            <label className="_form-label">
-                              Your Specialization
-                              <span className="text-danger"> *</span>
-                            </label>
                             <div className="_field-wrapper">
                               <select
                                 name="field[289]"
@@ -319,7 +317,7 @@ export default function RegisterPage({
                                 required
                                 onChange={handleSpecializationChange}
                               >
-                                <option selected></option>
+                                <option value="">Your Specialization *</option>
                                 <option value="Developer">Developer</option>
                                 <option value="Real Estate Agency">
                                   Real Estate Agency
@@ -370,18 +368,15 @@ export default function RegisterPage({
 
                         <div className="">
                           <div className="_form_element _x73880331 _full_width form-group">
-                            <label className="_form-label">
-                              How did you hear about us?
-                              <span className="text-danger"> *</span>
-                            </label>
-
                             <select
                               name="field[348]"
                               className="custom-select"
                               id="field[348]"
                               required
                             >
-                              <option selected></option>
+                              <option value="">
+                                How did you hear about us? *
+                              </option>
                               <option value="Email Newsletter">
                                 Email Newsletter
                               </option>

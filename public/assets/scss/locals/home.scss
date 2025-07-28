@@ -50,18 +50,4 @@
   mask-repeat: no-repeat;
 }
 
-.upcoming-card {
-  position: relative;
-  overflow: hidden;
 
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100px;
-    height: 2px;
-    border-radius: 8px;
-    background-color: $primary-color-saudi;
-    transform-origin: top left;
-    animation: dashAround 4s linear infinite;
-  }
-}

@@ -38,7 +38,7 @@ export default function FooterComponent() {
 
   const menuItems = pageData.menuitems.value as unknown as Menuitem[];
   return (
-    <div className="relative">
+    <div className="relative ">
       <SlantedSection className="bg-[#333333] absolute -bottom-80 " />
       <footer className="footer-component-wrapper pt-20">
         <div className="container mx-auto   ">
