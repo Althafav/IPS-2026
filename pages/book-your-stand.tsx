@@ -130,10 +130,10 @@ export default function RegisterPage({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="container">
-        <div className="register-interest-form-wrapper-2026 py-10 bg-white relative">
+        <div className="register-interest-form-wrapper-2026 py-10 px-5 bg-white relative shadow-sm">
           <img
             src={pageData.bannerimage.value[0]?.url}
-            alt=""
+            alt={pageData.bannerheading.value}
             className="form-banner-img mb-5 aspect-auto object-cover h-auto"
           />
           <div className="">
@@ -546,7 +546,7 @@ export default function RegisterPage({
                       <div className="_button-wrapper _full_width">
                         <button
                           id="_form_400_submit"
-                          className="_submit form-btn-blue bg-primary-orange px-4 py-2 rounded-full text-white"
+                          className="_submit form-btn-blue  bg-primary-orange w-full py-2 text-white"
                           type="submit"
                         >
                           Submit

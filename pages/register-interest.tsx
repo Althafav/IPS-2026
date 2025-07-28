@@ -134,7 +134,7 @@ export default function RegisterPage({
         <div className="register-interest-form-wrapper-2026 py-10 px-5 bg-white relative shadow-sm">
           <img
             src={pageData.bannerimage.value[0]?.url}
-            alt=""
+            alt={pageData.bannerheading.value}
             className="form-banner-img mb-5 aspect-auto object-cover h-auto"
           />
           <div className="">
