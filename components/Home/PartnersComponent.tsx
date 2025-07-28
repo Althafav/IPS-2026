@@ -55,7 +55,14 @@ export default function SupportingPartnerComponent() {
                   {item.items.value.map((p: any, index: number) => {
                     const partner: Partneritem = p;
                     return (
-                      <SwiperSlide className="partner-item bg-white p-10 rounded-2xl flex items-center justify-center shadow-md">
+                      <SwiperSlide className="partner-item relative bg-white p-10 rounded-2xl flex items-center justify-center shadow-md">
+                        {partner.category.value[0] && (
+                          <div className="type-tag px-2 bg-primary-orange  text-white absolute left-0 top-0">
+                            <p className="text-sm">
+                              {partner.category.value[0]?.name}
+                            </p>
+                          </div>
+                        )}
                         <Link href={partner.website.value}>
                           <Image
                             width={300}

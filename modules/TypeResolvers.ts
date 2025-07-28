@@ -1,5 +1,6 @@
 
 import { Aboutpage2026 } from "@/models/aboutpage2026";
+import { Basiccontentpage } from "@/models/basiccontentpage";
 import { Blogitem2026 } from "@/models/blogitem2026";
 import { Blogspage2026 } from "@/models/blogspage2026";
 import { Conferencepage } from "@/models/conferencepage";
@@ -20,5 +21,6 @@ export const TypeResolver = [
    new KontentDelivery.TypeResolver("Blogspage2026", (rawData: any) => new Blogspage2026()),
       new KontentDelivery.TypeResolver("Blogitem2026", (rawData: any) => new Blogitem2026()),
    new KontentDelivery.TypeResolver("Formpage2026", (rawData: any) => new Formpage2026()),
+      new KontentDelivery.TypeResolver("Basiccontentpage", (rawData: any) => new Basiccontentpage()),
  
 ];
