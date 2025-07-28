@@ -14,6 +14,7 @@ import { Partnerspage } from "@/models/partnerspage";
 import { Partneritem } from "@/models/partneritem";
 import Link from "next/link";
 import { Partners } from "@/models/partners";
+import InnerBanner from "@/components/common/InnerBanner";
 
 type PageProps = {
   pageData: Partnerspage | null;
@@ -67,39 +68,50 @@ export default function Page({ pageData }: PageProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="partners-page-wrapper">
+        <InnerBanner
+          bannerImage={pageData.bannerimage.value[0]?.url}
+          bannerHeading={pageData.heading.value}
+          className="text-center"
+        />
         <div className="py-10">
           <div className="container mx-auto">
-            <div className="partner-wrapper space-y-8">
+            <div className="partner-wrapper grid grid-cols-1 gap-20">
               {pageData.items.value.map((p: any, idx: number) => {
                 const item: Partners = p;
                 return (
-                  <React.Fragment key={idx}>
-                    <div className="text-center">
-                      <p className="text-xl font-semibold">
+                  <div className="">
+                    <div className=" text-center mb-5">
+                      <h1 className=" text-2xl font-bold">
                         {item.heading.value}
-                      </p>
+                      </h1>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 justify-items-center">
-                      {item.items.value.map((i: any, iIdx: number) => {
-                        const partner: Partneritem = i;
-                        return (
-                          <div
-                            key={iIdx}
-                            className="w-full flex items-center justify-center"
-                          >
-                            <Image
-                              width={300}
-                              height={200}
-                              src={partner.logo.value[0]?.url}
-                              alt={partner.name.value}
-                              className="w-full max-h-32 object-contain aspect-video"
-                            />
-                          </div>
-                        );
-                      })}
+                    <div className="">
+                      <div className="flex flex-wrap justify-center gap-8">
+                        {item.items.value.map((i: any, iIdx: number) => {
+                          const partner: Partneritem = i;
+                          return (
+                            <Link
+                              href={partner.website.value}
+                              target="_blank"
+                              key={iIdx}
+                              className="flex items-center justify-center w-[220px] h-[120px] "
+                            >
+                              <div className="flex items-center justify-center">
+                                <Image
+                                  width={300}
+                                  height={200}
+                                  src={partner.logo.value[0]?.url}
+                                  alt={partner.name.value}
+                                  className=" object-contain aspect-video shadow-sm p-4"
+                                />
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </React.Fragment>
+                  </div>
                 );
               })}
             </div>

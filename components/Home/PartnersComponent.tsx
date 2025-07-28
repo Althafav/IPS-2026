@@ -80,6 +80,14 @@ export default function SupportingPartnerComponent() {
             })}
           </Swiper>
         </div>
+
+        <div className="flex justify-center">
+          <Link href="/partners">
+            <span className="px-4 py-2 bg-primary-orange text-white rounded-full">
+              View All
+            </span>
+          </Link>
+        </div>
       </div>
     </section>
   );

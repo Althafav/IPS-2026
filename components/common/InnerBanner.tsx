@@ -13,7 +13,7 @@ export default function InnerBanner(props: any) {
       />
 
       <div className="container relative z-10">
-        <h1 className="text-white text-2xl font-bold uppercase">
+        <h1 className={`text-white text-2xl font-bold uppercase ${props.className}`}>
           {props.bannerHeading}
         </h1>
       </div>
