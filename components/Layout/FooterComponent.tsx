@@ -60,23 +60,23 @@ export default function FooterComponent() {
 
               <div className="flex gap-3 mt-10">
                 <Link href={pageData.linkedinlink.value} target="_blank">
-                  <FaLinkedinIn className="text-primary-orange" size={32} />
+                  <FaLinkedinIn className="text-primary-orange hover:scale-75 transition duration-75 ease-in" size={32} />
                 </Link>
 
                 <Link href={pageData.facebooklink.value}>
-                  <FaFacebookF className="text-primary-orange" size={32} />
+                  <FaFacebookF className="text-primary-orange hover:scale-75 transition duration-75 ease-in" size={32} />
                 </Link>
 
                 <Link href={pageData.xtwiterlink.value}>
-                  <FaXTwitter className="text-primary-orange" size={32} />
+                  <FaXTwitter className="text-primary-orange hover:scale-75 transition duration-75 ease-in" size={32} />
                 </Link>
 
                 <Link href={pageData.youtubelink.value}>
-                  <FaYoutube className="text-primary-orange" size={32} />
+                  <FaYoutube className="text-primary-orange hover:scale-75 transition duration-75 ease-in" size={32} />
                 </Link>
 
                 <Link href={pageData.instagramlink.value}>
-                  <FaInstagram className="text-primary-orange" size={32} />
+                  <FaInstagram className="text-primary-orange hover:scale-75 transition duration-75 ease-in" size={32} />
                 </Link>
               </div>
             </div>
