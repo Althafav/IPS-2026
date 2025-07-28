@@ -81,7 +81,7 @@ export default function FooterComponent() {
               </div>
             </div>
 
-            <div className="flex justify-center">
+            <div className="flex sm:justify-center">
               <nav className="flex flex-col gap-5">
                 {menuItems.map((item) => {
                   const name = item.name.value;
