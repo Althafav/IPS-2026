@@ -1,6 +1,6 @@
 import SpinnerComponent from "@/components/UI/SpinnerComponent";
 import Globals from "@/modules/Globals";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 
 
@@ -50,8 +50,25 @@ export default function Page({ articleData }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { slug } = context.params!;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response = await Globals.KontentClient.items()
+    .type("blogitem2026")
+    .withParameter("depth", "0")
+    .toPromise();
+
+  const paths = response.items.map((item: any) => ({
+    params: { slug: item.slug.value },
+  }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const slug = context.params?.slug as string;
 
   try {
     const response = await Globals.KontentClient.items()
@@ -61,19 +78,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       .toPromise();
 
     const articleItem = response.items[0] || null;
-    console.log(articleItem, "a");
+
+    if (!articleItem) {
+      return { notFound: true };
+    }
 
     return {
       props: {
         articleData: JSON.parse(JSON.stringify(articleItem)),
       },
+      revalidate: 60,
     };
   } catch (error) {
     console.error("Error fetching article:", error);
-    return {
-      props: {
-        articleData: null,
-      },
-    };
+    return { notFound: true };
   }
 };

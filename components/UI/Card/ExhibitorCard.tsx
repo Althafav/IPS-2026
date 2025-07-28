@@ -5,9 +5,9 @@ import React from "react";
 
 export default function ExhibitorCard({ exhibitor }: any) {
   return (
-    <div className="rounded-2xl p-2 shadow-md exhibitor-card hover:shadow-lg transition relative min-h-[480px]">
+    <div className="rounded-2xl p-2 shadow-md exhibitor-card hover:shadow-lg transition relative min-h-[400px] sm:min-h-[480px]">
       <div>
-        <div className="bg-white p-5 rounded-2xl flex justify-center items-center h-[250px]">
+        <div className="bg-white p-5 rounded-2xl flex justify-center items-center  sm:h-[250px]">
           <Image
             width={160}
             height={160}

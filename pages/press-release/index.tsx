@@ -26,7 +26,7 @@ export default function BlogsPage({ pageData }: Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {pageData.pressreleaseitems.value.map((blog: any) => (
             <Link
-              href={`/news/${slugify(blog.heading.value)}`}
+              href={`/press-release/${slugify(blog.heading.value)}`}
               key={blog.system.codename}
               className="bg-white shadow-md rounded-xl overflow-hidden"
             >

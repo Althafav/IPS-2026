@@ -1,6 +1,6 @@
 import SpinnerComponent from "@/components/UI/SpinnerComponent";
 import Globals from "@/modules/Globals";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 
 import Head from "next/head";
@@ -67,6 +67,34 @@ export default function Page({ articleData }: Props) {
           href={`https://www.ipscongress.com/blogs/${articleData.slug.value}`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: heading.value,
+              image: articleData.image.value[0]?.url,
+              datePublished: system.lastModified,
+              dateModified: system.lastModified,
+              author: { "@type": "Organization", name: "IPS Congress" },
+              publisher: {
+                "@type": "Organization",
+                name: "IPS Congress",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://www.ipscongress.com/assets/logo.png",
+                },
+              },
+              description: articleData.metadataMetadescription.value,
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `https://www.ipscongress.com/blogs/${articleData.slug.value}`,
+              },
+            }),
+          }}
+        />
       </Head>
       <div className="herosection-wrapper relative w-full sm:h-[300px] overflow-hidden">
         <img
@@ -76,8 +104,8 @@ export default function Page({ articleData }: Props) {
         />
       </div>
 
-      <div className="container mx-auto py-10">
-        <div className="max-w-6xl mx-auto">
+      <main className="container mx-auto py-10">
+        <article className="max-w-6xl mx-auto">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             {heading.value}
           </h1>
@@ -87,14 +115,29 @@ export default function Page({ articleData }: Props) {
             className="prose max-w-none"
             dangerouslySetInnerHTML={{ __html: content.value }}
           />
-        </div>
-      </div>
+        </article>
+      </main>
     </div>
   );
 }
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response = await Globals.KontentClient.items()
+    .type("blogitem2026")
+    .withParameter("depth", "0")
+    .toPromise();
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { slug } = context.params!;
+  const paths = response.items.map((item: any) => ({
+    params: { slug: item.slug.value },
+  }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const slug = context.params?.slug as string;
 
   try {
     const response = await Globals.KontentClient.items()
@@ -105,17 +148,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const articleItem = response.items[0] || null;
 
+    if (!articleItem) {
+      return { notFound: true };
+    }
+
     return {
       props: {
         articleData: JSON.parse(JSON.stringify(articleItem)),
       },
+      revalidate: 60,
     };
   } catch (error) {
     console.error("Error fetching article:", error);
-    return {
-      props: {
-        articleData: null,
-      },
-    };
+    return { notFound: true };
   }
 };

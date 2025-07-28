@@ -20,7 +20,7 @@ export default function ExhibitorDetail({ exhibitor }: Props) {
         <title>{exhibitor.company_name} - Exhibitor</title>
       </Head>
 
-      <div className="max-w-5xl mx-auto py-10">
+      <div className="container mx-auto py-10">
         <div className="bg-gray-100 rounded-2xl p-6 md:p-10 flex sm:flex-col flex-col-reverse md:flex-row justify-between items-start md:items-center gap-6 shadow-sm">
           {/* LEFT CONTENT */}
           <div className="flex-1">

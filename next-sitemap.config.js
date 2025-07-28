@@ -5,11 +5,15 @@ module.exports = {
   sitemapSize: 100000,
   generateIndexSitemap: false,
   transform: async (config, path) => {
-    let priority = 0.7;
+    let priority = 0.8;
 
     if (path === "/") {
       priority = 1.0;
-    } else if (path.startsWith("/about")) {
+    }
+    if (path === "/book-your-stand") {
+      priority = 1.0;
+    }
+    else if (path.startsWith("/about")) {
       priority = 0.9;
     } 
 
