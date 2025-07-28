@@ -57,8 +57,8 @@ export default function SupportingPartnerComponent() {
                     return (
                       <SwiperSlide className="partner-item relative bg-white p-10 rounded-2xl flex items-center justify-center shadow-md">
                         {partner.category.value[0] && (
-                          <div className="type-tag px-2 bg-primary-orange  text-white absolute left-0 top-0">
-                            <p className="text-sm">
+                          <div className="type-tag px-2 py-1 bg-primary-orange  text-white absolute left-0 top-0">
+                            <p className="text-xs">
                               {partner.category.value[0]?.name}
                             </p>
                           </div>

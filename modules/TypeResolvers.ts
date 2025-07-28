@@ -7,6 +7,7 @@ import { Conferencepage } from "@/models/conferencepage";
 import { Exhibitionpage2026 } from "@/models/exhibitionpage2026";
 import { Formpage2026 } from "@/models/formpage2026";
 import { Homepage2026 } from "@/models/homepage2026";
+import { Partnerspage } from "@/models/partnerspage";
 
 
 
@@ -20,6 +21,8 @@ export const TypeResolver = [
      new KontentDelivery.TypeResolver("Exhibitionpage2026", (rawData: any) => new Exhibitionpage2026()),
    new KontentDelivery.TypeResolver("Blogspage2026", (rawData: any) => new Blogspage2026()),
       new KontentDelivery.TypeResolver("Blogitem2026", (rawData: any) => new Blogitem2026()),
+
+         new KontentDelivery.TypeResolver("Partnerspage", (rawData: any) => new Partnerspage()),
    new KontentDelivery.TypeResolver("Formpage2026", (rawData: any) => new Formpage2026()),
       new KontentDelivery.TypeResolver("Basiccontentpage", (rawData: any) => new Basiccontentpage()),
  
