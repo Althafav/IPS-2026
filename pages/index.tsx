@@ -44,7 +44,7 @@ export default function Page({ pageData }: PageProps) {
             <h2 className="text-primary-blue text-center lg:text-2xl mb-3">
               {pageData.videoheading.value}
             </h2>
-            <p className="text-center max-w-2xl mx-auto text-lg">
+            <p className="text-center mx-auto text-lg">
               {pageData.videodescription.value}
             </p>
 
