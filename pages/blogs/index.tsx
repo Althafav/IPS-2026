@@ -14,7 +14,47 @@ export default function BlogsPage({ pageData }: Props) {
   return (
     <>
       <Head>
-        <title>Blogs</title>
+        <title>{pageData.metadataPagetitle.value}</title>
+        <meta name="title" content={pageData.metadataMetatitle.value} />
+        <meta
+          name="description"
+          content={pageData.metadataMetadescription.value}
+        />
+
+        <meta property="og:title" content={pageData.metadataPagetitle.value} />
+        <meta
+          property="og:description"
+          content={pageData.metadataMetadescription.value}
+        />
+        <meta
+          property="og:url"
+          content="https://www.ipscongress.com/blogs"
+        />
+        <meta property="og:site_name" content={Globals.SITE_NAME} />
+        <meta
+          property="og:image"
+          content="https://www.ipscongress.com/assets/logos/ips-logo-thumbnail.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:type" content="article" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageData.metadataPagetitle.value} />
+        <meta
+          name="twitter:description"
+          content={pageData.metadataMetadescription.value}
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.ipscongress.com/assets/logos/ips-logo-thumbnail.jpg"
+        />
+
+        <link
+          rel="canonical"
+          href="https://www.ipscongress.com/blogs"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div className="max-w-7xl mx-auto px-4 py-10">
@@ -26,7 +66,7 @@ export default function BlogsPage({ pageData }: Props) {
               className="bg-white shadow-md rounded-xl overflow-hidden"
             >
               <Image
-                src={blog.image.value[0]?.url || "/placeholder.jpg"}
+                src={blog.image.value[0]?.url}
                 alt={blog.heading.value}
                 width={400}
                 height={250}

@@ -16,7 +16,6 @@ interface PageDataProps {
 }
 
 const TestimonialSection: React.FC<PageDataProps> = ({ pageData }) => {
-  // Refs for custom navigation
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
@@ -119,8 +118,8 @@ const TestimonialSection: React.FC<PageDataProps> = ({ pageData }) => {
                                 gradientUnits="userSpaceOnUse"
                                 gradientTransform="translate(14.5714 7.12073) rotate(60.9542) scale(36.0153 43.268)"
                               >
-                                <stop stop-color="#FFA800" />
-                                <stop offset="1" stop-color="#FF4D00" />
+                                <stop stopColor="#FFA800" />
+                                <stop offset="1" stopColor="#FF4D00" />
                               </radialGradient>
                             </defs>
                           </svg>

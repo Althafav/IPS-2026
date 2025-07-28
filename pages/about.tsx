@@ -11,6 +11,7 @@ import PillarSectionSticky from "@/components/About/PillarSectionSticky";
 import SectionHeading from "@/components/common/SectionHeading";
 import Image from "next/image";
 import TestimonialSection from "@/components/About/TestimonialSection";
+import Head from "next/head";
 
 type PageProps = {
   pageData: Aboutpage2026 | null;
@@ -35,6 +36,49 @@ export default function Page({ pageData }: PageProps) {
     : ExhibitorProfileItems.slice(0, 2);
   return (
     <div>
+      <Head>
+        <title>{pageData.metadataPagetitle.value}</title>
+        <meta name="title" content={pageData.metadataMetatitle.value} />
+        <meta
+          name="description"
+          content={pageData.metadataMetadescription.value}
+        />
+
+        <meta property="og:title" content={pageData.metadataPagetitle.value} />
+        <meta
+          property="og:description"
+          content={pageData.metadataMetadescription.value}
+        />
+        <meta
+          property="og:url"
+          content="https://www.ipscongress.com/about"
+        />
+        <meta property="og:site_name" content={Globals.SITE_NAME} />
+        <meta
+          property="og:image"
+          content="https://www.ipscongress.com/assets/logos/ips-logo-thumbnail.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:type" content="article" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageData.metadataPagetitle.value} />
+        <meta
+          name="twitter:description"
+          content={pageData.metadataMetadescription.value}
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.ipscongress.com/assets/logos/ips-logo-thumbnail.jpg"
+        />
+
+        <link
+          rel="canonical"
+          href="https://www.ipscongress.com/about"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <div className="aboutpage">
         <div className="banner-wrapper">
           <div

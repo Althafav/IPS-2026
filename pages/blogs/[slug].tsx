@@ -25,6 +25,49 @@ export default function Page({ articleData }: Props) {
 
   return (
     <div className="article-detail-wrapper">
+      <Head>
+        <title>{articleData.metadataPagetitle.value}</title>
+        <meta name="title" content={articleData.metadataMetatitle.value} />
+        <meta
+          name="description"
+          content={articleData.metadataMetadescription.value}
+        />
+
+        <meta
+          property="og:title"
+          content={articleData.metadataPagetitle.value}
+        />
+        <meta
+          property="og:description"
+          content={articleData.metadataMetadescription.value}
+        />
+        <meta
+          property="og:url"
+          content={`https://www.ipscongress.com/blogs/${articleData.slug.value}`}
+        />
+        <meta property="og:site_name" content={Globals.SITE_NAME} />
+        <meta property="og:image" content={articleData.image.value[0]?.url} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:type" content="article" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content={articleData.metadataPagetitle.value}
+        />
+        <meta
+          name="twitter:description"
+          content={articleData.metadataMetadescription.value}
+        />
+        <meta name="twitter:image" content={articleData.image.value[0]?.url} />
+
+        <link
+          rel="canonical"
+          href={`https://www.ipscongress.com/blogs/${articleData.slug.value}`}
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <div className="herosection-wrapper relative w-full sm:h-[300px] overflow-hidden">
         <img
           src={image.value[0]?.url}
@@ -61,7 +104,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       .toPromise();
 
     const articleItem = response.items[0] || null;
-   
 
     return {
       props: {
