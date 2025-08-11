@@ -164,6 +164,8 @@ export default function RegisterPage({
                       name="field[38]"
                       value={pageData.formsubmit.value}
                     />
+
+                    <input type="hidden" name="psrlink" value={pageData.psrlink.value} />
                     <input type="hidden" name="field[328]" value={mainsource} />
                     <input type="hidden" name="field[329]" value={subsource} />
 

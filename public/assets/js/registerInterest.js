@@ -759,15 +759,17 @@ window._load_script = function (url, callback, isSubmit) {
       }
 
       if ($("#catalogue").prop("checked") == true) {
-        downloadDocument(
+        downloadDocument2(
           "E-Catalogue.pdf",
           "/documents/IPS 2022_Exibition_Catalogue.pdf"
         );
       }
+
+        var psrLink = $('input[name="psrlink"]').val() || '';
       if ($("#psr").prop("checked") == true) {
-        downloadDocument(
+        downloadDocument2(
           "IPS 2025 Post Show Report.pdf",
-          "/documents/IPS 2025 PSR.pdf"
+          psrLink
         );
       }
 
@@ -828,7 +830,7 @@ window._load_script = function (url, callback, isSubmit) {
       var subSource = $('input[name="field[329]"]').val();
 
       var itemName = name;
-      var leadType = "IPS Lead";
+      var leadType = "";
 
       const mutation = `mutation {
                    create_item(
