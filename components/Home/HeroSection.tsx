@@ -14,7 +14,7 @@ const HeroSection: React.FC<PageDataProps> = ({ pageData }) => {
 
   return (
     <div className="herosection-wrapper-home relative w-full sm:h-[90vh] overflow-hidden">
-      <Image priority  width={1080} height={600} src={pageData.bannerimage.value[0]?.url} alt="" className="absolute inset-0 w-full h-full object-cover brightness-40 aspect-video" />
+      <Image priority  width={1080} height={600} src={pageData.bannerimage.value[0]?.url} alt="" className="absolute inset-0 w-full h-full object-cover  aspect-video" />
       {/* <video
         autoPlay
         loop
