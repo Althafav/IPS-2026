@@ -816,7 +816,7 @@ window._load_script = function (url, callback, isSubmit) {
       var subSource = $('input[name="field[329]"]').val();
 
       var itemName = name;
-      var leadType = "";
+      var leadType = "IPS Lead";
 
       let columns = [
         {
