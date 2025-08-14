@@ -548,7 +548,7 @@ export default function RegisterPage({
                       <div className="_button-wrapper _full_width">
                         <button
                           id="_form_400_submit"
-                          className="_submit form-btn-blue  bg-primary-orange w-full py-2 text-white"
+                          className="_submit cta-btn form-btn-blue  bg-primary-orange w-full py-2 text-white"
                           type="submit"
                         >
                           Submit

@@ -712,6 +712,7 @@ window._load_script = function (url, callback, isSubmit) {
       var submitButton = e.target.querySelector("#_form_400_submit");
       submitButton.disabled = true;
       submitButton.classList.add("processing");
+      submitButton.innerHTML = 'Processing... <span class="loader"></span>';
       var serialized = _form_serialize(
         document.getElementById("_form_400_")
       ).replace(/%0A/g, "\\n");
@@ -765,12 +766,9 @@ window._load_script = function (url, callback, isSubmit) {
         );
       }
 
-        var psrLink = $('input[name="psrlink"]').val() || '';
+      var psrLink = $('input[name="psrlink"]').val() || "";
       if ($("#psr").prop("checked") == true) {
-        downloadDocument2(
-          "IPS 2025 Post Show Report.pdf",
-          psrLink
-        );
+        downloadDocument2("IPS 2025 Post Show Report.pdf", psrLink);
       }
 
       /////Monday PUSH API Starts/////
@@ -778,8 +776,7 @@ window._load_script = function (url, callback, isSubmit) {
         .map(function () {
           return $(this).val();
         })
-        .get()
-        .join('\\",\\"');
+        .get();
 
       interest = `\\\"${interest}\\\"`;
 
@@ -796,19 +793,12 @@ window._load_script = function (url, callback, isSubmit) {
       var country = $('select[name="field[3]"]').val();
       var nationality = $('input[name="field[99]"]').val();
       var message = $('textarea[name="field[6]"]').val();
-      if (message == undefined) {
-        message = "N/A";
-      }
-      if (message) {
-        message = message.replaceAll("/", " ");
-        message = message.replaceAll("\n", " ");
-        message = message.replaceAll("\\", " ");
-      }
+
       var specialization = $('select[name="field[289]"]').val();
       if (specialization == undefined) {
         specialization = "Other";
       }
-      specialization = `\\\"${specialization}\\\"`;
+
       var hearAboutUs = $('select[name="field[348]"]').val();
       if (hearAboutUs == undefined) {
         hearAboutUs = "Other";
@@ -819,11 +809,7 @@ window._load_script = function (url, callback, isSubmit) {
       if (sponsorship_type == undefined) {
         sponsorship_type = "";
       }
-      if (sponsorship_type !== "") {
-        sponsorship_type = `\\\"${sponsorship_type}\\\"`;
-      }
 
-      hearAboutUs = `\\\"${hearAboutUs}\\\"`;
       var formSubmitted = $('input[name="field[38]"]').val();
 
       var mainSource = $('input[name="field[328]"]').val();
@@ -832,55 +818,132 @@ window._load_script = function (url, callback, isSubmit) {
       var itemName = name;
       var leadType = "";
 
-      const mutation = `mutation {
-                   create_item(
-                       board_id: 7268050149, 
-                       group_id: \"new_group__1\", 
-                       item_name: \"${itemName}\", 
-                       column_values: \"{
-                           \\\"lead_status\\\":\\\"New Lead\\\",
-                           \\\"name\\\":\\\"${name}\\\",
-                           \\\"status_1__1\\\":\\\"${leadType}\\\",
-                           \\\"country____1\\\":\\\"${country}\\\",
-                           \\\"nationality____1\\\":\\\"${nationality}\\\",
-                            \\\"nature_of_business____1\\\":\\\"${businessNature}\\\",
-                           \\\"text2__1\\\":\\\"${jobTitle}\\\",
-                           \\\"lead_email\\\":{\\\"email\\\":\\\"${email}\\\",\\\"text\\\":\\\"${email}\\\"},
-                           \\\"dup__of_mobile8__1\\\":\\\"${mobileText}\\\",
-                           \\\"dropdown1__1\\\":{\\\"labels\\\":[${specialization}]},
-                           \\\"dropdown_mkn4rkdp\\\":{\\\"labels\\\":[${sponsorship_type}]},
-                            
-                              
-
-                           \\\"dropdown0__1\\\":{\\\"labels\\\":[${hearAboutUs}]},
-                           \\\"lead_company\\\":\\\"${organization}\\\",
-                           \\\"long_text__1\\\":\\\"${message}\\\",
-                           \\\"text6__1\\\":\\\"${mainSource}\\\",
-                           \\\"text68__1\\\":\\\"${subSource}\\\",
-                           \\\"interested_in____1\\\":{\\\"labels\\\":[${interest}]},
-                           \\\"text49__1\\\":\\\"${formSubmitted}\\\"}\") 
-
-                           {id}}`;
-
-      var settings = {
-        url: "https://api.monday.com/v2",
-        method: "POST",
-        timeout: 0,
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjM4NTQxMTI2OSwiYWFpIjoxMSwidWlkIjo2MzU5NDg5MywiaWFkIjoiMjAyNC0wNy0xN1QwODo1MjoxNS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MjQ0NzAwNjQsInJnbiI6InVzZTEifQ.mFBBbSdTcCTF0iU8hYFDLoLmZQHnLjNoMFk7d6dUYTk",
-          "Content-Type": "application/json",
-          "API-version": "2023-10",
-          Cookie:
-            "__cf_bm=r0lDqnsvWXGmEVZofHvAkLCnjKGaQHExYQIA3u5ciPM-1724733381-1.0.1.1-bI9CMjAqfTjUdQqfXj.oAiHL_qz4RqFtgO57jrTNDhohtQkE5lrc0yvFTrLgoWpDkaj4JepFQjm7svliN.EIpDHm6yeqLtgFIZXc86Ni1.c",
+      let columns = [
+        {
+          label: "name",
+          type: "text",
+          value: name,
+          list_value: [],
         },
-        data: JSON.stringify({
-          query: mutation,
-        }),
+        {
+          label: "lead_company",
+          type: "text",
+          value: organization,
+          list_value: [],
+        },
+        {
+          label: "text2__1",
+          type: "text",
+          value: jobTitle,
+          list_value: [],
+        },
+        {
+          label: "dup__of_mobile8__1",
+          type: "text",
+          value: mobileText,
+          list_value: [],
+        },
+        {
+          label: "country____1",
+          type: "text",
+          value: country,
+          list_value: [],
+        },
+
+        {
+          label: "nationality____1",
+          type: "text",
+          value: nationality,
+          list_value: [],
+        },
+
+        {
+          label: "interested_in____1",
+          type: "checkbox",
+          value: "",
+          list_value: interest,
+        },
+
+        {
+          label: "nature_of_business____1",
+          type: "text",
+          value: businessNature,
+          list_value: [],
+        },
+
+        {
+          label: "dropdown1__1",
+          type: "text",
+          value: specialization,
+          list_value: [],
+        },
+
+        {
+          label: "dropdown_mkn4rkdp",
+          type: "text",
+          value: sponsorship_type,
+          list_value: [],
+        },
+
+        {
+          label: "dropdown0__1",
+          type: "text",
+          value: hearAboutUs,
+          list_value: [],
+        },
+
+        {
+          label: "long_text__1",
+          type: "text",
+          value: message,
+          list_value: [],
+        },
+
+        {
+          label: "text6__1",
+          type: "text",
+          value: mainSource,
+          list_value: [],
+        },
+
+        {
+          label: "text68__1",
+          type: "text",
+          value: subSource,
+          list_value: [],
+        },
+
+        {
+          label: "text49__1",
+          type: "text",
+          value: formSubmitted,
+          list_value: [],
+        },
+      ];
+
+      // Dynamic data object
+      let requestData = {
+        lead_type: leadType,
+        group_id: "topics",
+        lead_status: "New Lead",
+        board_id: "7268050149",
+        item_name: name,
+        email: email,
+        column_values: columns,
       };
 
-      $.ajax(settings).done(function (response) {
-        console.log(response);
+      // AJAX request
+      $.ajax({
+        url: "https://payment.aimcongress.com/api/generic/MondayPush",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(requestData),
+        success: function (response) {
+          console.log("Success:", response);
+        },
+        error: function (xhr, status, error) {
+          console.error("Error:", error);
+        },
       });
 
       /////Monday PUSH API Ends/////

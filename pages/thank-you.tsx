@@ -57,29 +57,41 @@ export default function ThankYouPage() {
           <p className="my-3">{lowerText}</p>
 
           <div className="flex gap-3 ">
-            <Link href={pageData.facebooklink.value} target="_blank">
-              <FaFacebook color="black" size={20} />
-            </Link>
+            {pageData.facebooklink.value && (
+              <Link href={pageData.facebooklink.value} target="_blank">
+                <FaFacebook color="black" size={20} />
+              </Link>
+            )}
 
-            <Link href={pageData.whatsapplink.value} target="_blank">
-              <FaWhatsapp color="black" size={20} />
-            </Link>
+            {pageData.whatsapplink.value && (
+              <Link href={pageData.whatsapplink.value} target="_blank">
+                <FaWhatsapp color="black" size={20} />
+              </Link>
+            )}
 
-            <Link href={pageData.linkinlink.value} target="_blank">
-              <FaLinkedin color="black" size={20} />
-            </Link>
+            {pageData.linkinlink.value && (
+              <Link href={pageData.linkinlink.value} target="_blank">
+                <FaLinkedin color="black" size={20} />
+              </Link>
+            )}
 
-            <Link href={pageData.instagramlink.value} target="_blank">
-              <FaInstagram color="black" size={20} />
-            </Link>
+            {pageData.instagramlink.value && (
+              <Link href={pageData.instagramlink.value} target="_blank">
+                <FaInstagram color="black" size={20} />
+              </Link>
+            )}
 
-            <Link href={pageData.youtubelink.value} target="_blank">
-              <FaYoutube color="black" size={20} />
-            </Link>
+            {pageData.youtubelink.value && (
+              <Link href={pageData.youtubelink.value} target="_blank">
+                <FaYoutube color="black" size={20} />
+              </Link>
+            )}
 
-            <Link href={pageData.xlink.value} target="_blank">
-              <FaXTwitter color="black" size={20} />
-            </Link>
+            {pageData.xlink.value && (
+              <Link href={pageData.xlink.value} target="_blank">
+                <FaXTwitter color="black" size={20} />
+              </Link>
+            )}
           </div>
         </div>
       </div>
