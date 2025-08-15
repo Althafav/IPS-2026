@@ -46,7 +46,6 @@ export default function FooterComponent() {
     <div className="relative ">
       <SlantedSection className="bg-[#333333] absolute -bottom-80 " />
       <footer className="footer-component-wrapper ">
-       
         <div className="container mx-auto   ">
           <div className="py-10">
             <form
@@ -106,7 +105,7 @@ export default function FooterComponent() {
             </form>
           </div>
           <div className="w-full h-[1px] bg-black" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 pb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 pb-20 pt-10">
             <div className="flex-shrink-0">
               <p className="text-white mb-5">
                 {pageData.organizedbytext.value}
